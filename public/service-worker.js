@@ -1,5 +1,5 @@
 // Cache name - update this to force refresh of cache
-const CACHE_NAME = 'fishing-game-cache-v1';
+const CACHE_NAME = 'fishing-game-cache-v2';
 
 // Basic URLs to always cache
 const INITIAL_URLS = [
@@ -15,33 +15,39 @@ const INITIAL_URLS = [
 // Install event - cache essential resources
 self.addEventListener('install', (event) => {
   console.log('Service Worker: Installing');
+
+  // Skip waiting to activate immediately
+  self.skipWaiting();
+
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Service Worker: Caching initial files');
         return cache.addAll(INITIAL_URLS);
       })
-      .then(() => self.skipWaiting())
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   console.log('Service Worker: Activating');
+
+  // Take control of all clients immediately
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((name) => {
-          if (name !== CACHE_NAME) {
-            console.log('Service Worker: Clearing old cache', name);
-            return caches.delete(name);
-          }
-        })
-      );
-    }).then(() => {
-      console.log('Service Worker: Now controlling active clients');
-      return self.clients.claim();
-    })
+    Promise.all([
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((name) => {
+            if (name !== CACHE_NAME) {
+              console.log('Service Worker: Clearing old cache', name);
+              return caches.delete(name);
+            }
+          })
+        );
+      }),
+      // Take control of all clients immediately
+      self.clients.claim()
+    ])
   );
 });
 
