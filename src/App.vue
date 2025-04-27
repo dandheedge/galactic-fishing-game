@@ -32,9 +32,6 @@ import ConnectionStatus from './components/ConnectionStatus.vue';
 /* Global styles */
 html, body {
   image-rendering: pixelated;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
   -webkit-font-smoothing: none; /* For crisp pixel fonts */
   -moz-osx-font-smoothing: none;
 }

@@ -20,7 +20,7 @@ const testProperty = ref('This will change the content hash');
 </script>
 
 <template>
-  <div class="fixed bottom-0 w-full p-2 z-50 flex justify-center">
+  <div class="fixed bottom-0 p-2 z-50 right-0">
     <!-- Status indicator -->
     <div 
       class="px-3 py-1 rounded text-white text-sm opacity-70 hover:opacity-100 transition-opacity"
