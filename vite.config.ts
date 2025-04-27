@@ -75,4 +75,31 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    minify: 'terser',
+    target: 'es2020',
+    terserOptions: {
+      format: {
+        comments: false
+      }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vue': ['vue', 'vue-router'],
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020',
+      supported: { 
+        bigint: true 
+      },
+      treeShaking: true,
+      keepNames: true
+    }
+  }
 })
