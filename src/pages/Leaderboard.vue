@@ -58,16 +58,16 @@ onUnmounted(() => {
       <!-- Leaderboard data -->
       <div v-else class="overflow-hidden">
         <!-- Mobile card view (visible on small screens only) -->
-        <div class="md:hidden space-y-3">
+        <div class="md:hidden space-y-3 overflow-x-hidden">
           <div 
             v-for="(player, index) in leaderboard" 
             :key="index"
             :class="{'bg-yellow-100': index % 2 === 0, 'bg-white': index % 2 !== 0}"
             class="pixel-container p-3 transition-colors hover:bg-blue-100"
           >
-            <div class="flex justify-between items-center mb-2">
+            <div class="flex flex-col sm:flex-row sm:justify-between items-center mb-2 gap-2">
               <span class="font-bold pixel-text">Rank: {{ player.rank || index + 1 }}</span>
-              <span class="font-bold text-right pixel-text">{{ player.username || 'Unknown' }}</span>
+              <span class="font-bold pixel-text">{{ player.username || 'Unknown' }}</span>
             </div>
             <div class="grid grid-cols-3 gap-2 text-sm">
               <div class="text-center">

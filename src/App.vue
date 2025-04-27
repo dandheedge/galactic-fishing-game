@@ -7,7 +7,7 @@ import ConnectionStatus from './components/ConnectionStatus.vue';
     <!-- Header -->
     <header class="bg-primary px-4 py-3 pixel-border mb-4 shadow-pixel">
       <div class="mx-auto max-w-screen-2xl">
-        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+        <div class="flex flex-col flex-wrap sm:flex-row sm:justify-between sm:items-center">
           <h1 class="text-lg sm:text-xl md:text-2xl text-black text-center sm:text-left mb-3 sm:mb-0 pixel-text">Galactic Fishing Game</h1>
           <nav class="flex flex-col sm:flex-row gap-2 sm:gap-4">
             <router-link to="/" class="pixel-button text-sm text-center">Home</router-link>
