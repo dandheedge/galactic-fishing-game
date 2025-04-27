@@ -23,7 +23,7 @@ This is a fishing game built using modern web technologies:
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd bloque-fishing-game
+cd galactic-fishing-game
 
 # Install dependencies
 bun install
