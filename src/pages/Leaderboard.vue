@@ -101,9 +101,9 @@ onUnmounted(() => {
             v-model="searchQuery"
             type="text"
             placeholder="Search player..."
-            class="w-auto pixel-input pl-10 pr-4 py-2 bg-white border-2 border-gray-800 focus:border-primary focus:ring-0 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-200"
+            class="w-auto pixel-input pl-10 pr-4 py-2 bg-white border-2 border-gray-800 focus:border-primary focus:ring-0 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-200 font-press-start text-xs sm:text-sm [font-family:'Press_Start_2P']"
           />
-          <span class="absolute left-3 top-2 text-gray-500">🔍</span>
+          <span class="absolute left-3 top-2 text-gray-500 font-press-start text-xs sm:text-sm [font-family:'Press_Start_2P']">🔍</span>
         </div>
       </div>
 
@@ -192,7 +192,7 @@ onUnmounted(() => {
             <button 
               @click="prevPage" 
               :disabled="currentPage === 1"
-              class="pixel-button px-3 py-1 text-sm sm:text-base"
+              class="pixel-button px-3 py-1 text-xs sm:text-sm font-press-start [font-family:'Press_Start_2P']"
               :class="{'opacity-50 cursor-not-allowed': currentPage === 1}"
             >
               ←
@@ -204,7 +204,7 @@ onUnmounted(() => {
                   v-for="page in totalPages"
                   :key="page"
                   @click="goToPage(page)"
-                  class="pixel-button px-3 py-1 text-sm sm:text-base min-w-[2.5rem]"
+                  class="pixel-button px-3 py-1 text-xs sm:text-sm font-press-start [font-family:'Press_Start_2P'] min-w-[2.5rem]"
                   :class="{
                     'bg-primary text-white': currentPage === page,
                     'hover:bg-gray-100': currentPage !== page
@@ -218,14 +218,14 @@ onUnmounted(() => {
             <button 
               @click="nextPage" 
               :disabled="currentPage === totalPages"
-              class="pixel-button px-3 py-1 text-sm sm:text-base"
+              class="pixel-button px-3 py-1 text-xs sm:text-sm font-press-start [font-family:'Press_Start_2P']"
               :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
             >
               →
             </button>
           </div>
           
-          <div class="text-xs text-gray-600 pixel-text">
+          <div class="text-xs text-gray-600 pixel-text font-press-start [font-family:'Press_Start_2P']">
             Page {{ currentPage }} of {{ totalPages }}
           </div>
         </div>
