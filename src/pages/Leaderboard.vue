@@ -136,7 +136,10 @@ onUnmounted(() => {
           >
             <div class="flex flex-col sm:flex-row sm:justify-between items-center mb-2 gap-2">
               <span class="font-bold pixel-text">Rank: {{ player.rank || index + 1 }}</span>
-              <span class="font-bold pixel-text">{{ player.username || 'Unknown' }}</span>
+              <div class="flex items-center">
+                {{ player.username || 'Unknown' }}
+                <span v-if="player.isInfected" class="ml-2 text-red-500"> ☢️</span>
+              </div>
             </div>
             <div class="grid grid-cols-2 gap-2 text-sm">
               <div class="text-center">
@@ -181,7 +184,12 @@ onUnmounted(() => {
                 class="border-b border-gray-200 transition-colors hover:bg-blue-100"
               >
                 <td class="p-2 sm:p-3 lg:p-4 pixel-text">{{ player.rank || index + 1 }}</td>
-                <td class="p-2 sm:p-3 lg:p-4 font-medium pixel-text">{{ player.username || 'Unknown' }}</td>
+                <td class="p-2 sm:p-3 lg:p-4 font-medium pixel-text">
+                  <div class="flex items-center">
+                    {{ player.username || 'Unknown' }}
+                    <span v-if="player.isInfected" class="ml-2 text-red-500"> ☢️</span>
+                  </div>
+                </td>
                 <td class="p-2 sm:p-3 lg:p-4 text-center">
                   <span class="inline-block bg-blue-200 px-2 py-1 rounded shadow-inner-pixel">{{ player.level }}</span>
                 </td>
