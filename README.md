@@ -67,7 +67,7 @@ yarn preview
 - **Component-Based**: Build reusable Vue components for game elements
 - **State Management**: Use Vue's Composition API for state management
 - **Routing**: Vue Router for any multi-page aspects of the game
-- **API Handling**: Using ky for network requests every 5 seconds
+- **API Handling**: Using ky for network requests every 10 seconds
 
 ### Styling
 
