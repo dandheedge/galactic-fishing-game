@@ -93,7 +93,7 @@ onMounted(() => {
                 <div class="flex items-center justify-between">
                   <p class="text-sm sm:text-base">
                     <span class="font-bold pixel-text">{{ item.cost.toLocaleString() }}</span> 
-                    <span class="text-yellow-600">coins</span>
+                    <span class="text-yellow-600"> gold</span>
                   </p>
                 </div>
               </div>

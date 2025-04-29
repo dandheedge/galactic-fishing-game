@@ -138,7 +138,7 @@ onUnmounted(() => {
               <span class="font-bold pixel-text">Rank: {{ player.rank || index + 1 }}</span>
               <span class="font-bold pixel-text">{{ player.username || 'Unknown' }}</span>
             </div>
-            <div class="grid grid-cols-3 gap-2 text-sm">
+            <div class="grid grid-cols-2 gap-2 text-sm">
               <div class="text-center">
                 <div class="text-xs text-gray-600">Level</div>
                 <span class="inline-block bg-blue-200 px-2 py-1 rounded shadow-inner-pixel">{{ player.level }}</span>
@@ -147,9 +147,14 @@ onUnmounted(() => {
                 <div class="text-xs text-gray-600">XP</div>
                 <div class="pixel-text">{{ player.xp.toLocaleString() }}</div>
               </div>
+            
               <div class="text-center">
-                <div class="text-xs text-gray-600">Gold</div>
-                <div class="font-medium text-yellow-600 pixel-text">{{ player.gold.toLocaleString() }}</div>
+                  <div class="text-xs text-gray-600">Gold</div>
+                  <div class="font-medium text-yellow-600 pixel-text">{{ player.gold.toLocaleString() }}</div>
+                </div>
+              <div class="text-center">
+                <div class="text-xs text-gray-600">Tier</div>
+                <div class="text-lg font-press-start [font-family:'Press_Start_2P']">{{ player.fishEmojis || '🐟' }}</div>
               </div>
             </div>
           </div>
@@ -165,6 +170,7 @@ onUnmounted(() => {
                 <th class="p-2 sm:p-3 lg:p-4 text-center">Level</th>
                 <th class="p-2 sm:p-3 lg:p-4 text-right">XP</th>
                 <th class="p-2 sm:p-3 lg:p-4 text-right">Gold</th>
+                <th class="p-2 sm:p-3 lg:p-4 text-center">Tier</th>
               </tr>
             </thead>
             <tbody>
@@ -181,6 +187,9 @@ onUnmounted(() => {
                 </td>
                 <td class="p-2 sm:p-3 lg:p-4 text-right pixel-text">{{ player.xp.toLocaleString() }}</td>
                 <td class="p-2 sm:p-3 lg:p-4 text-right font-medium text-yellow-600 pixel-text">{{ player.gold.toLocaleString() }}</td>
+                <td class="p-2 sm:p-3 lg:p-4 text-center font-press-start [font-family:'Press_Start_2P'] text-lg">
+                  {{ player.fishEmojis || '🐟' }}
+                </td>
               </tr>
             </tbody>
           </table>

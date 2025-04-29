@@ -11,6 +11,7 @@ export interface LeaderboardItem {
   level: number
   xp: number
   gold: number
+  fishEmojis?: string
 }
 
 export interface LeaderboardResponse {
