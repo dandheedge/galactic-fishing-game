@@ -61,10 +61,10 @@ onMounted(() => {
       </div>
       
       <!-- Market Layout: Grid + Info Panel -->
-      <div v-else class="flex flex-col md:flex-row gap-4 p-4">
+      <div v-else class="flex flex-col md:flex-row gap-4 p-4 min-h-[202px] items-center">
         <!-- Item Grid (Left/Top) -->
         <div 
-          class="grid grid-cols-3 gap-2 flex-shrink-0"
+          class="grid grid-cols-3 gap-2 flex-shrink-0 w-full sm:w-auto"
           @mouseleave="hoveredItem = null"
         >
           <div 
@@ -100,7 +100,7 @@ onMounted(() => {
               <span class="text-[#f2b973]"> gold</span>
             </p>
           </div>
-          <div v-else class="flex items-center justify-center h-full">
+          <div v-else class="flex items-center justify-center h-[150px]">
             <p class="pixel-text text-center text-white">Hover to view details, click to select</p>
           </div>
         </div>
@@ -134,7 +134,7 @@ onMounted(() => {
 
 @media (min-width: 1440px) {
   .emoji-container {
-    height: 3rem;
+    height: 2rem;
   }
 }
 

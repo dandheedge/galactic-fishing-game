@@ -101,7 +101,7 @@ onUnmounted(() => {
             v-model="searchQuery"
             type="text"
             placeholder="Search player..."
-            class="w-full max-sm:max-w-[120px] sm:w-auto pixel-input pl-10 pr-4 py-2 bg-white border-2 border-[#34348c] focus:border-[#5656e9] focus:ring-0 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-200 font-press-start text-xs max-sm:text-[10px] sm:text-sm [font-family:\'Press_Start_2P\']"
+            class="w-full max-sm:max-w-[120px] sm:w-auto pixel-input pl-10 pr-4 py-2 bg-white border-2 border-[#34348c] focus:border-[#5656e9] focus:ring-0 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-200 font-press-start text-xs max-sm:text-[10px] sm:text-sm [font-family:'Press_Start_2P'] [image-rendering:pixelated] [image-rendering:crisp-edges] [-webkit-font-smoothing:none] [font-smooth:never]"
           />
           <span class="absolute left-3 top-2 max-sm:top-[0.65rem] text-[#4545ba] font-press-start text-xs max-sm:text-[10px] sm:text-sm [font-family:\'Press_Start_2P\']">🔍</span>
         </div>
