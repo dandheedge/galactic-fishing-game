@@ -1,18 +1,31 @@
 <script setup lang="ts">
 import ConnectionStatus from './components/ConnectionStatus.vue';
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <template>
   <div class="font-pixel min-h-screen bg-blue-100 retro-bg pixel-crisp">
     <!-- Header -->
-    <header class="bg-primary px-4 py-3 pixel-border mb-4 shadow-pixel">
+    <header class="bg-[#5656e9] px-4 py-3 pixel-border mb-4 shadow-pixel">
       <div class="mx-auto max-w-screen-2xl">
         <div class="flex flex-col flex-wrap sm:flex-row sm:justify-between sm:items-center">
-          <h1 class="text-lg sm:text-xl md:text-2xl text-black text-center sm:text-left mb-3 sm:mb-0 pixel-text">Galactic Fishing Game</h1>
+          <h1 class="text-lg sm:text-xl md:text-2xl text-white text-center sm:text-left mb-3 sm:mb-0 pixel-text [font-family:'Press_Start_2P']">Galactic Fishing Game</h1>
           <nav class="flex flex-col sm:flex-row gap-2 sm:gap-4">
-            <router-link to="/" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">Home</router-link>
-            <router-link to="/leaderboard" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">Leaderboard</router-link>
-            <router-link to="/market" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">Market</router-link>
+            <router-link 
+              to="/" 
+              class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-press-start [font-family:'Press_Start_2P'] font-medium whitespace-nowrap outline-none text-start bg-[#990f5d] border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-sm sm:text-base h-11 py-2 px-5 group cursor-pointer"
+              active-class="bg-[#ff199b] shadow-inner-pixel"
+              >Home</router-link>
+            <router-link 
+              to="/leaderboard" 
+              class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-press-start [font-family:'Press_Start_2P'] font-medium whitespace-nowrap outline-none text-start bg-[#990f5d] border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-sm sm:text-base h-11 py-2 px-5 group cursor-pointer"
+              active-class="bg-[#ff199b] shadow-inner-pixel"
+              >Leaderboard</router-link>
+            <router-link 
+              to="/market" 
+              class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-press-start [font-family:'Press_Start_2P'] font-medium whitespace-nowrap outline-none text-start bg-[#990f5d] border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-sm sm:text-base h-11 py-2 px-5 group cursor-pointer"
+              active-class="bg-[#ff199b] shadow-inner-pixel"
+              >Market</router-link>
           </nav>
         </div>
       </div>
@@ -82,7 +95,6 @@ body {
 .pixel-container {
   border: 2px solid rgba(0, 0, 0, 0.2);
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
-  background-color: white;
   border-radius: 2px;
   padding: 0.5rem;
 }
@@ -107,5 +119,9 @@ a.router-link-active {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.shadow-inner-pixel {
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 </style>

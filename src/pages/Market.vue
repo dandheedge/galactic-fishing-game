@@ -1,10 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { api, type MarketItem } from '../services/api'
 
 const marketItems = ref<MarketItem[]>([])
 const loading = ref(true)
 const error = ref('')
+const hoveredItem = ref<MarketItem | null>(null)
+const pinnedItem = ref<MarketItem | null>(null)
+const animatingItemId = ref<string | null>(null)
+
+// Computed property to determine which item details to display
+const displayedItem = computed(() => {
+  return hoveredItem.value || pinnedItem.value
+})
+
+// Function to handle item click with animation
+const handleItemClick = (item: MarketItem) => {
+  pinnedItem.value = item
+  animatingItemId.value = item.id
+  setTimeout(() => {
+    animatingItemId.value = null
+  }, 150) // Animation duration
+}
 
 // Function to fetch market data
 const fetchMarket = async () => {
@@ -25,7 +42,7 @@ const getItemEmoji = (type: string) => {
     case 'fishing_rod':
       return '🎣'
     case 'poison_leveling':
-      return '☠️'
+      return '☢️'
     case 'poison_delay':
       return '⏱️'
     case 'poison_recovery':
@@ -36,25 +53,6 @@ const getItemEmoji = (type: string) => {
       return '❓'
   }
 }
-
-// Get color based on item type
-const getItemColor = (type: string) => {
-  switch (type) {
-    case 'fishing_rod':
-      return 'bg-[rgb(119,164,212)]/20'
-    case 'poison_leveling':
-      return 'bg-[rgb(255,87,87)]/20'
-    case 'poison_delay':
-      return 'bg-[rgb(255,87,87)]/20'
-    case 'poison_recovery':
-      return 'bg-[rgb(119,164,212)]/20'
-    case 'poison_reveal_fishes':
-      return 'bg-[rgb(119,164,212)]/20'
-    default:
-      return 'bg-[rgb(247,239,233)]'
-  }
-}
-
 // Fetch data on component mount
 onMounted(() => {
   fetchMarket()
@@ -65,49 +63,62 @@ onMounted(() => {
   <div class="px-2 sm:px-4">
     <h1 class="text-xl sm:text-2xl lg:text-3xl text-center mb-4 sm:mb-6 pixel-text">Market</h1>
     
-    <div>
+    <div class="market-outer-container pixel-container bg-[#dfdffe] sm:max-w-5xl sm:mx-auto">
       <!-- Loading state -->
       <div v-if="loading" class="text-center py-6 sm:py-8">
-        <div class="animate-bounce inline-block w-6 h-6 sm:w-8 sm:h-8 bg-primary mb-4 shadow-pixel"></div>
+        <div class="animate-bounce inline-block w-6 h-6 sm:w-8 sm:h-8 bg-[#5656e9] mb-4 shadow-pixel"></div>
         <p class="pixel-text">Loading market items...</p>
       </div>
       
       <!-- Error state -->
-      <div v-else-if="error" class="text-center py-6 sm:py-8 text-red-500">
+      <div v-else-if="error" class="text-center py-6 sm:py-8 text-[#ff199b]">
         <p class="pixel-text">{{ error }}</p>
         <button @click="fetchMarket" class="pixel-button mt-4">Try Again</button>
       </div>
       
-      <!-- Market list -->
-      <div v-else class="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-pixel">
-        <ul class="divide-y divide-gray-200 list-none m-0 p-0">
-          <li 
+      <!-- Market Layout: Grid + Info Panel -->
+      <div v-else class="flex flex-col md:flex-row gap-4 p-4">
+        <!-- Item Grid (Left/Top) -->
+        <div 
+          class="grid grid-cols-3 gap-2 flex-shrink-0"
+          @mouseleave="hoveredItem = null"
+        >
+          <div 
             v-for="item in marketItems" 
             :key="item.id"
-            class="p-3 sm:p-4 hover:bg-[rgb(119,164,212)]/20 transition-all"
-            :class="getItemColor(item.type)"
+            :class="[
+              'pixel-container border-2 shadow-[2px_2px_0px] hover:bg-[#fff] transition-all duration-150 ease-in-out cursor-pointer aspect-square flex items-center justify-center',
+              item.id === pinnedItem?.id 
+                ? 'bg-[#e68c4f] border-[#5656e9] shadow-[#5656e9]'
+                : 'bg-[#efeffe] border-[#e68c4f] shadow-[#e68c4f]',
+              item.id === animatingItemId ? 'transform scale-95' : 'transform scale-100'
+            ]"
+            @mouseover="hoveredItem = item"
+            @click="handleItemClick(item)"
           >
-            <div class="flex items-start gap-3">
-              <div class="emoji-container text-2xl max-sm:text-xl sm:text-3xl lg:text-4xl w-10 max-sm:w-8 sm:w-12 flex-shrink-0 pt-1">
-                {{ getItemEmoji(item.type) }}
-              </div>
-              <div class="flex-1">
-                <p class="font-medium text-sm max-sm:text-xs sm:text-base lg:text-lg pixel-text">{{ item.name }}</p>
-                <p class="text-xs max-sm:text-[10px] sm:text-sm text-gray-600 mb-2 lg:mb-3">{{ item.description }}</p>
-                <div class="flex items-center justify-between">
-                  <p class="text-sm max-sm:text-xs sm:text-base">
-                    <span class="font-bold pixel-text">{{ item.cost.toLocaleString() }}</span> 
-                    <span class="text-[rgb(255,87,87)]"> gold</span>
-                  </p>
-                </div>
-              </div>
+            <div class="emoji-container text-3xl sm:text-4xl">
+              {{ getItemEmoji(item.type) }}
             </div>
-          </li>
-        </ul>
+          </div>
+          <!-- Empty state for grid -->
+          <div v-if="marketItems.length === 0" class="col-span-3 text-center py-6 sm:py-8">
+            <p class="pixel-text">No items available.</p>
+          </div>
+        </div>
         
-        <!-- Empty state -->
-        <div v-if="marketItems.length === 0" class="text-center py-6 sm:py-8">
-          <p class="pixel-text">No items available in the market.</p>
+        <!-- Info Panel (Right/Bottom) -->
+        <div class="flex-1 pixel-container bg-[#5656e9] border-[#f2b973] p-4 min-h-[150px] text-[#000]">
+          <div v-if="displayedItem" class="flex flex-col h-full">
+            <h3 class="pixel-text text-lg mb-2 text-amber-300">{{ displayedItem.name }}</h3>
+            <p class="text-sm mb-4 min-h-[3rem] text-white">{{ displayedItem.description }}</p>
+            <p class="pixel-text text-base mt-auto pt-2">
+              <span class="font-bold text-white">{{ displayedItem.cost.toLocaleString() }}</span> 
+              <span class="text-[#f2b973]"> gold</span>
+            </p>
+          </div>
+          <div v-else class="flex items-center justify-center h-full">
+            <p class="pixel-text text-center text-white">Hover to view details, click to select</p>
+          </div>
         </div>
       </div>
     </div>
@@ -118,36 +129,25 @@ onMounted(() => {
 /* Add line clamp functionality */
 .line-clamp-1 {
   display: -webkit-box;
-  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .line-clamp-2 {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Remove list styles */
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
 /* 8-bit emoji styling */
 .emoji-container {
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.5rem;
-  aspect-ratio: 1;
-  background: white;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  height: auto;
+  width: auto;
+  padding: 0.5rem;
 }
 
 @media (min-width: 1440px) {
@@ -156,9 +156,9 @@ ul {
   }
 }
 
-@media (min-width: 2560px) {
-  .emoji-container {
-    height: 4rem;
-  }
+/* Specific styling for the main market container border */
+.market-outer-container.pixel-container {
+  border-color: #34348c;
+  box-shadow: 2px 2px 0px #34348c;
 }
 </style> 
