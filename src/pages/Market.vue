@@ -30,6 +30,8 @@ const getItemEmoji = (type: string) => {
       return '⏱️'
     case 'poison_recovery':
       return '💊'
+    case 'poison_reveal_fishes':
+      return '🔍'
     default:
       return '❓'
   }
@@ -39,15 +41,17 @@ const getItemEmoji = (type: string) => {
 const getItemColor = (type: string) => {
   switch (type) {
     case 'fishing_rod':
-      return 'bg-blue-100'
+      return 'bg-[rgb(119,164,212)]/20'
     case 'poison_leveling':
-      return 'bg-purple-100'
+      return 'bg-[rgb(255,87,87)]/20'
     case 'poison_delay':
-      return 'bg-red-100'
+      return 'bg-[rgb(255,87,87)]/20'
     case 'poison_recovery':
-      return 'bg-green-100'
+      return 'bg-[rgb(119,164,212)]/20'
+    case 'poison_reveal_fishes':
+      return 'bg-[rgb(119,164,212)]/20'
     default:
-      return 'bg-gray-100'
+      return 'bg-[rgb(247,239,233)]'
   }
 }
 
@@ -80,20 +84,20 @@ onMounted(() => {
           <li 
             v-for="item in marketItems" 
             :key="item.id"
-            class="p-3 sm:p-4 hover:bg-gray-50 transition-all"
+            class="p-3 sm:p-4 hover:bg-[rgb(119,164,212)]/20 transition-all"
             :class="getItemColor(item.type)"
           >
             <div class="flex items-start gap-3">
-              <div class="emoji-container text-2xl sm:text-3xl lg:text-4xl w-10 sm:w-12 flex-shrink-0 pt-1">
+              <div class="emoji-container text-2xl max-sm:text-xl sm:text-3xl lg:text-4xl w-10 max-sm:w-8 sm:w-12 flex-shrink-0 pt-1">
                 {{ getItemEmoji(item.type) }}
               </div>
               <div class="flex-1">
-                <p class="font-medium text-sm sm:text-base lg:text-lg pixel-text">{{ item.name }}</p>
-                <p class="text-xs sm:text-sm text-gray-600 mb-2 lg:mb-3">{{ item.description }}</p>
+                <p class="font-medium text-sm max-sm:text-xs sm:text-base lg:text-lg pixel-text">{{ item.name }}</p>
+                <p class="text-xs max-sm:text-[10px] sm:text-sm text-gray-600 mb-2 lg:mb-3">{{ item.description }}</p>
                 <div class="flex items-center justify-between">
-                  <p class="text-sm sm:text-base">
+                  <p class="text-sm max-sm:text-xs sm:text-base">
                     <span class="font-bold pixel-text">{{ item.cost.toLocaleString() }}</span> 
-                    <span class="text-yellow-600"> gold</span>
+                    <span class="text-[rgb(255,87,87)]"> gold</span>
                   </p>
                 </div>
               </div>

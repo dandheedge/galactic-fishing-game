@@ -31,13 +31,13 @@
           </p>
           
           <div class="flex flex-col gap-2 sm:gap-3 mt-4">
-            <router-link to="/leaderboard" class="pixel-button text-center py-1 px-2 sm:py-2 sm:px-3 w-auto">
+            <router-link to="/leaderboard" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">
               <span class="flex items-center justify-center gap-2">
                 <span class="text-sm sm:text-base">🏆</span>
                 <span>Leaderboard</span>
               </span>
             </router-link>
-            <router-link to="/market" class="pixel-button text-center py-1 px-2 sm:py-2 sm:px-3 w-auto">
+            <router-link to="/market" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">
               <span class="flex items-center justify-center gap-2">
                 <span class="text-sm sm:text-base">🛒</span>
                 <span>Market</span>

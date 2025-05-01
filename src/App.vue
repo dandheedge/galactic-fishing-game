@@ -10,9 +10,9 @@ import ConnectionStatus from './components/ConnectionStatus.vue';
         <div class="flex flex-col flex-wrap sm:flex-row sm:justify-between sm:items-center">
           <h1 class="text-lg sm:text-xl md:text-2xl text-black text-center sm:text-left mb-3 sm:mb-0 pixel-text">Galactic Fishing Game</h1>
           <nav class="flex flex-col sm:flex-row gap-2 sm:gap-4">
-            <router-link to="/" class="pixel-button text-sm text-center">Home</router-link>
-            <router-link to="/leaderboard" class="pixel-button text-sm text-center">Leaderboard</router-link>
-            <router-link to="/market" class="pixel-button text-sm text-center">Market</router-link>
+            <router-link to="/" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">Home</router-link>
+            <router-link to="/leaderboard" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">Leaderboard</router-link>
+            <router-link to="/market" class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group">Market</router-link>
           </nav>
         </div>
       </div>
@@ -54,10 +54,19 @@ body {
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
 
+.shadow-button {
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
 .pixel-button {
   position: relative;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease-in-out;
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.pixel-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
 .pixel-button:active {

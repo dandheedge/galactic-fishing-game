@@ -101,9 +101,9 @@ onUnmounted(() => {
             v-model="searchQuery"
             type="text"
             placeholder="Search player..."
-            class="w-auto pixel-input pl-10 pr-4 py-2 bg-white border-2 border-gray-800 focus:border-primary focus:ring-0 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-200 font-press-start text-xs sm:text-sm [font-family:'Press_Start_2P']"
+            class="w-full max-sm:max-w-[120px] sm:w-auto pixel-input pl-10 pr-4 py-2 bg-white border-2 border-gray-800 focus:border-primary focus:ring-0 focus:outline-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-200 font-press-start text-xs max-sm:text-[10px] sm:text-sm [font-family:'Press_Start_2P']"
           />
-          <span class="absolute left-3 top-2 text-gray-500 font-press-start text-xs sm:text-sm [font-family:'Press_Start_2P']">🔍</span>
+          <span class="absolute left-3 top-2 max-sm:top-[0.65rem] text-gray-500 font-press-start text-xs max-sm:text-[10px] sm:text-sm [font-family:'Press_Start_2P']">🔍</span>
         </div>
       </div>
 
@@ -138,7 +138,7 @@ onUnmounted(() => {
               <span class="font-bold pixel-text">Rank: {{ player.rank || index + 1 }}</span>
               <div class="flex items-center">
                 {{ player.username || 'Unknown' }}
-                <span v-if="player.isInfected" class="ml-2 text-red-500"> ☢️</span>
+                <span v-if="player.isInfected" class="ml-2 text-[rgb(255,87,87)]"> ☢️</span>
               </div>
             </div>
             <div class="grid grid-cols-2 gap-2 text-sm">
@@ -153,7 +153,7 @@ onUnmounted(() => {
             
               <div class="text-center">
                   <div class="text-xs text-gray-600">Gold</div>
-                  <div class="font-medium text-yellow-600 pixel-text">{{ player.gold.toLocaleString() }}</div>
+                  <div class="text-yellow-600 pixel-text">{{ player.gold.toLocaleString() }}</div>
                 </div>
               <div class="text-center">
                 <div class="text-xs text-gray-600">Tier</div>
@@ -187,7 +187,7 @@ onUnmounted(() => {
                 <td class="p-2 sm:p-3 lg:p-4 font-medium pixel-text">
                   <div class="flex items-center">
                     {{ player.username || 'Unknown' }}
-                    <span v-if="player.isInfected" class="ml-2 text-red-500"> ☢️</span>
+                    <span v-if="player.isInfected" class="ml-2 text-[rgb(255,87,87)]"> ☢️</span>
                   </div>
                 </td>
                 <td class="p-2 sm:p-3 lg:p-4 text-center">
@@ -209,7 +209,7 @@ onUnmounted(() => {
             <button 
               @click="prevPage" 
               :disabled="currentPage === 1"
-              class="pixel-button px-3 py-1 text-xs sm:text-sm font-press-start [font-family:'Press_Start_2P']"
+              class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group"
               :class="{'opacity-50 cursor-not-allowed': currentPage === 1}"
             >
               ←
@@ -221,7 +221,7 @@ onUnmounted(() => {
                   v-for="page in totalPages"
                   :key="page"
                   @click="goToPage(page)"
-                  class="pixel-button px-3 py-1 text-xs sm:text-sm font-press-start [font-family:'Press_Start_2P'] min-w-[2.5rem]"
+                  class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group"
                   :class="{
                     'bg-primary text-white': currentPage === page,
                     'hover:bg-gray-100': currentPage !== page
@@ -235,7 +235,7 @@ onUnmounted(() => {
             <button 
               @click="nextPage" 
               :disabled="currentPage === totalPages"
-              class="pixel-button px-3 py-1 text-xs sm:text-sm font-press-start [font-family:'Press_Start_2P']"
+              class="inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium whitespace-nowrap outline-none text-start bg-primary border border-black text-white transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1 text-lg h-11 py-2 px-5 group"
               :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
             >
               →
