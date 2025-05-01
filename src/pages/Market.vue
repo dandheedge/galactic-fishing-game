@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { api, type MarketItem } from '../services/api'
+import ItemIcon from '../components/ItemIcon.vue'
 
 const marketItems = ref<MarketItem[]>([])
 const loading = ref(true)
@@ -36,23 +37,6 @@ const fetchMarket = async () => {
   }
 }
 
-// Get item emoji based on type
-const getItemEmoji = (type: string) => {
-  switch (type) {
-    case 'fishing_rod':
-      return '🎣'
-    case 'poison_leveling':
-      return '☢️'
-    case 'poison_delay':
-      return '⏱️'
-    case 'poison_recovery':
-      return '💊'
-    case 'poison_reveal_fishes':
-      return '🔍'
-    default:
-      return '❓'
-  }
-}
 // Fetch data on component mount
 onMounted(() => {
   fetchMarket()
@@ -96,8 +80,8 @@ onMounted(() => {
             @mouseover="hoveredItem = item"
             @click="handleItemClick(item)"
           >
-            <div class="emoji-container text-3xl sm:text-4xl">
-              {{ getItemEmoji(item.type) }}
+            <div class="emoji-container">
+              <ItemIcon :item-type="item.type" />
             </div>
           </div>
           <!-- Empty state for grid -->
@@ -142,12 +126,10 @@ onMounted(() => {
 /* 8-bit emoji styling */
 .emoji-container {
   aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   height: auto;
   width: auto;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 @media (min-width: 1440px) {
