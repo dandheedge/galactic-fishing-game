@@ -14,14 +14,14 @@ const searchQuery = ref('')
 const currentPage = ref(1)
 const itemsPerPage = ref(20)
 
-// Computed property for filtered leaderboard
+// Computed property for filtered leaderboard with preserved ranks
 const filteredLeaderboard = computed(() => {
   if (!searchQuery.value) return leaderboard.value
   
   const query = searchQuery.value.toLowerCase()
-  return leaderboard.value.filter(player => 
-    player.username.toLowerCase().includes(query)
-  )
+  return leaderboard.value
+    .map((player, index) => ({ ...player, originalRank: index + 1 }))
+    .filter(player => player.username.toLowerCase().includes(query))
 })
 
 // Computed property for total pages
@@ -135,7 +135,7 @@ onUnmounted(() => {
             class="pixel-container p-3 transition-colors hover:bg-[#dfdffe]"
           >
             <div class="flex flex-col sm:flex-row sm:justify-between items-center mb-2 gap-2">
-              <span class="font-bold pixel-text">Rank: {{ (currentPage - 1) * itemsPerPage + index + 1 }}</span>
+              <span class="font-bold pixel-text">Rank: {{ searchQuery ? player.originalRank : (currentPage - 1) * itemsPerPage + index + 1 }}</span>
               <div class="flex items-center">
                 {{ player.username || 'Unknown' }}
                 <span v-if="player.isInfected" class="ml-2 text-[#ff199b]"> ☢️</span>
@@ -183,7 +183,7 @@ onUnmounted(() => {
                 :class="{'bg-[#efeffe]': index % 2 === 0, 'bg-[#fff]': index % 2 !== 0}"
                 class="border-b border-[#dfdffe] transition-colors hover:bg-[#dfdffe]"
               >
-                <td class="p-2 sm:p-3 lg:p-4 pixel-text">{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
+                <td class="p-2 sm:p-3 lg:p-4 pixel-text">{{ searchQuery ? player.originalRank : (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                 <td class="p-2 sm:p-3 lg:p-4 font-medium pixel-text">
                   <div class="flex items-center">
                     {{ player.username || 'Unknown' }}
